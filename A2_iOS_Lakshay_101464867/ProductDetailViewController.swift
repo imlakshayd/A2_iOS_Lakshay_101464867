@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ProductDetailViewController: UIViewController {
     
@@ -22,6 +23,10 @@ class ProductDetailViewController: UIViewController {
     private let priceValueLabel = UILabel()
     private let providerTitleLabel = UILabel()
     private let providerValueLabel = UILabel()
+    
+    // MARK: - Data
+    private var products: [Product] = []
+    private var currentIndex: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,5 +89,18 @@ class ProductDetailViewController: UIViewController {
             fieldsStack.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -16),
             fieldsStack.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -20),
         ])
+    }
+    
+    // MARK: - Data Fetching
+    private func fetchProducts() {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let context = appDelegate.persistentContainer.viewContext
+        let request: NSFetchRequest<Product> = Product.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "productID", ascending: true)]
+        do {
+            products = try context.fetch(request)
+        } catch {
+            print("Failed to fetch products: \(error)")
+        }
     }
 }
