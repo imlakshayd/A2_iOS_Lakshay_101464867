@@ -24,9 +24,14 @@ class ProductDetailViewController: UIViewController {
     private let providerTitleLabel = UILabel()
     private let providerValueLabel = UILabel()
     
+    private let previousButton = UIButton(type: .system)
+    private let nextButton = UIButton(type: .system)
+    private let counterLabel = UILabel()
+    
     // MARK: - Data
     private var products: [Product] = []
     private var currentIndex: Int = 0
+    var selectedProductIndex: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +39,18 @@ class ProductDetailViewController: UIViewController {
         view.backgroundColor = .systemBackground
         setupUI()
         fetchProducts()
+        if let index = selectedProductIndex {
+            currentIndex = index
+        }
+        displayCurrentProduct()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchProducts()
+        if selectedProductIndex == nil && currentIndex >= products.count {
+            currentIndex = max(products.count - 1, 0)
+        }
         displayCurrentProduct()
     }
     
@@ -80,6 +97,25 @@ class ProductDetailViewController: UIViewController {
         
         cardView.addSubview(fieldsStack)
         
+        // Navigation buttons
+        previousButton.setTitle("← Previous", for: .normal)
+        previousButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
+        previousButton.addTarget(self, action: #selector(previousTapped), for: .touchUpInside)
+        
+        nextButton.setTitle("Next →", for: .normal)
+        nextButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
+        nextButton.addTarget(self, action: #selector(nextTapped), for: .touchUpInside)
+        
+        counterLabel.font = .systemFont(ofSize: 14)
+        counterLabel.textColor = .secondaryLabel
+        counterLabel.textAlignment = .center
+        
+        let navStack = UIStackView(arrangedSubviews: [previousButton, counterLabel, nextButton])
+        navStack.axis = .horizontal
+        navStack.distribution = .equalSpacing
+        navStack.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(navStack)
+        
         // Layout constraints
         NSLayoutConstraint.activate([
             cardView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
@@ -90,6 +126,10 @@ class ProductDetailViewController: UIViewController {
             fieldsStack.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 16),
             fieldsStack.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -16),
             fieldsStack.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -20),
+            
+            navStack.topAnchor.constraint(equalTo: cardView.bottomAnchor, constant: 24),
+            navStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
+            navStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
         ])
     }
     
@@ -118,5 +158,23 @@ class ProductDetailViewController: UIViewController {
         descriptionValueLabel.text = product.productDescription ?? "N/A"
         priceValueLabel.text = String(format: "$%.2f", product.productPrice)
         providerValueLabel.text = product.productProvider ?? "N/A"
+        counterLabel.text = "\(currentIndex + 1) of \(products.count)"
+        previousButton.isEnabled = currentIndex > 0
+        nextButton.isEnabled = currentIndex < products.count - 1
+    }
+    
+    // MARK: - Navigation Actions
+    @objc private func previousTapped() {
+        if currentIndex > 0 {
+            currentIndex -= 1
+            displayCurrentProduct()
+        }
+    }
+    
+    @objc private func nextTapped() {
+        if currentIndex < products.count - 1 {
+            currentIndex += 1
+            displayCurrentProduct()
+        }
     }
 }
