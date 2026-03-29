@@ -33,6 +33,8 @@ class ProductDetailViewController: UIViewController {
         title = "Product Detail"
         view.backgroundColor = .systemBackground
         setupUI()
+        fetchProducts()
+        displayCurrentProduct()
     }
     
     // MARK: - UI Setup
@@ -102,5 +104,19 @@ class ProductDetailViewController: UIViewController {
         } catch {
             print("Failed to fetch products: \(error)")
         }
+    }
+    
+    // MARK: - Display
+    private func displayCurrentProduct() {
+        guard !products.isEmpty else {
+            nameValueLabel.text = "No products available"
+            return
+        }
+        let product = products[currentIndex]
+        idValueLabel.text = "\(product.productID)"
+        nameValueLabel.text = product.productName ?? "N/A"
+        descriptionValueLabel.text = product.productDescription ?? "N/A"
+        priceValueLabel.text = String(format: "$%.2f", product.productPrice)
+        providerValueLabel.text = product.productProvider ?? "N/A"
     }
 }
