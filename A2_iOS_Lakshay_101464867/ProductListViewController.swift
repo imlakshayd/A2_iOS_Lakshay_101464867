@@ -82,5 +82,12 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let product = products[indexPath.row]
+        
+        if let index = products.firstIndex(where: { $0.productID == product.productID }) {
+            let detailVC = ProductDetailViewController()
+            detailVC.selectedProductIndex = index
+            navigationController?.pushViewController(detailVC, animated: true)
+        }
     }
 }
