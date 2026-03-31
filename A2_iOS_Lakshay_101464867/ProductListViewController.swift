@@ -21,6 +21,13 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
         title = "Products"
         view.backgroundColor = .systemBackground
         setupTableView()
+        fetchProducts()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchProducts()
+        tableView.reloadData()
     }
     
     // MARK: - Setup
@@ -37,6 +44,19 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
+    }
+    
+    // MARK: - Data Fetching
+    private func fetchProducts() {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let context = appDelegate.persistentContainer.viewContext
+        let request: NSFetchRequest<Product> = Product.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "productID", ascending: true)]
+        do {
+            products = try context.fetch(request)
+        } catch {
+            print("Failed to fetch products: \(error)")
+        }
     }
     
     // MARK: - UITableViewDataSource
