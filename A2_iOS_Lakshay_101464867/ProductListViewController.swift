@@ -8,19 +8,26 @@
 import UIKit
 import CoreData
 
-class ProductListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ProductListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating {
     
     // MARK: - UI Elements
     private let tableView = UITableView()
+    private let searchController = UISearchController(searchResultsController: nil)
     
     // MARK: - Data
     private var products: [Product] = []
+    private var filteredProducts: [Product] = []
+    
+    private var isSearching: Bool {
+        return searchController.isActive && !(searchController.searchBar.text?.isEmpty ?? true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Products"
         view.backgroundColor = .systemBackground
         setupTableView()
+        setupSearchController()
         fetchProducts()
     }
     
@@ -44,6 +51,14 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
+    }
+    
+    private func setupSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search by name or description"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
     }
     
     // MARK: - Data Fetching
