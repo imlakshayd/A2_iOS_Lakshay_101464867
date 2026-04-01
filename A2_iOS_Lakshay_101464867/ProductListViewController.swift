@@ -76,12 +76,12 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
     
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return products.count
+        return isSearching ? filteredProducts.count : products.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProductCell", for: indexPath)
-        let product = products[indexPath.row]
+        let product = isSearching ? filteredProducts[indexPath.row] : products[indexPath.row]
         
         var config = cell.defaultContentConfiguration()
         config.text = product.productName
@@ -97,12 +97,27 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let product = products[indexPath.row]
+        let product = isSearching ? filteredProducts[indexPath.row] : products[indexPath.row]
         
         if let index = products.firstIndex(where: { $0.productID == product.productID }) {
             let detailVC = ProductDetailViewController()
             detailVC.selectedProductIndex = index
             navigationController?.pushViewController(detailVC, animated: true)
         }
+    }
+    
+    // MARK: - UISearchResultsUpdating
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchText = searchController.searchBar.text, !searchText.isEmpty else {
+            filteredProducts = []
+            tableView.reloadData()
+            return
+        }
+        filteredProducts = products.filter { product in
+            let nameMatch = product.productName?.localizedCaseInsensitiveContains(searchText) ?? false
+            let descMatch = product.productDescription?.localizedCaseInsensitiveContains(searchText) ?? false
+            return nameMatch || descMatch
+        }
+        tableView.reloadData()
     }
 }
