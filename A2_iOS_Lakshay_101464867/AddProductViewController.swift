@@ -91,6 +91,38 @@ class AddProductViewController: UIViewController {
     
     // MARK: - Actions
     @objc private func saveTapped() {
-        // TODO: Implement save logic
+        guard let name = nameTextField.text, !name.trimmingCharacters(in: .whitespaces).isEmpty,
+              let description = descriptionTextField.text, !description.trimmingCharacters(in: .whitespaces).isEmpty,
+              let priceText = priceTextField.text, let price = Double(priceText),
+              let provider = providerTextField.text, !provider.trimmingCharacters(in: .whitespaces).isEmpty
+        else {
+            return
+        }
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let context = appDelegate.persistentContainer.viewContext
+        
+        // Get next available ID
+        let request: NSFetchRequest<Product> = Product.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "productID", ascending: false)]
+        request.fetchLimit = 1
+        
+        var nextID: Int32 = 1
+        if let maxProduct = try? context.fetch(request).first {
+            nextID = maxProduct.productID + 1
+        }
+        
+        let product = Product(context: context)
+        product.productID = nextID
+        product.productName = name.trimmingCharacters(in: .whitespaces)
+        product.productDescription = description.trimmingCharacters(in: .whitespaces)
+        product.productPrice = price
+        product.productProvider = provider.trimmingCharacters(in: .whitespaces)
+        
+        do {
+            try context.save()
+        } catch {
+            print("Failed to save product: \(error)")
+        }
     }
 }
