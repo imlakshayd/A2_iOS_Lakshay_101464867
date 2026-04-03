@@ -91,11 +91,21 @@ class AddProductViewController: UIViewController {
     
     // MARK: - Actions
     @objc private func saveTapped() {
-        guard let name = nameTextField.text, !name.trimmingCharacters(in: .whitespaces).isEmpty,
-              let description = descriptionTextField.text, !description.trimmingCharacters(in: .whitespaces).isEmpty,
-              let priceText = priceTextField.text, let price = Double(priceText),
-              let provider = providerTextField.text, !provider.trimmingCharacters(in: .whitespaces).isEmpty
-        else {
+        // Validate required fields
+        guard let name = nameTextField.text, !name.trimmingCharacters(in: .whitespaces).isEmpty else {
+            showAlert(title: "Missing Field", message: "Please enter a product name.")
+            return
+        }
+        guard let description = descriptionTextField.text, !description.trimmingCharacters(in: .whitespaces).isEmpty else {
+            showAlert(title: "Missing Field", message: "Please enter a product description.")
+            return
+        }
+        guard let priceText = priceTextField.text, let price = Double(priceText), price >= 0 else {
+            showAlert(title: "Invalid Price", message: "Please enter a valid numeric price.")
+            return
+        }
+        guard let provider = providerTextField.text, !provider.trimmingCharacters(in: .whitespaces).isEmpty else {
+            showAlert(title: "Missing Field", message: "Please enter a product provider.")
             return
         }
         
@@ -122,7 +132,14 @@ class AddProductViewController: UIViewController {
         do {
             try context.save()
         } catch {
-            print("Failed to save product: \(error)")
+            showAlert(title: "Error", message: "Failed to save product: \(error.localizedDescription)")
         }
+    }
+    
+    // MARK: - Helpers
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
     }
 }
