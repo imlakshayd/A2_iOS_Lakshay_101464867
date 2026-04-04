@@ -131,6 +131,7 @@ class AddProductViewController: UIViewController {
         
         do {
             try context.save()
+            showSuccessAlert()
         } catch {
             showAlert(title: "Error", message: "Failed to save product: \(error.localizedDescription)")
         }
@@ -141,5 +142,20 @@ class AddProductViewController: UIViewController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
+    }
+    
+    private func showSuccessAlert() {
+        let alert = UIAlertController(title: "Success", message: "Product added successfully!", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default) { [weak self] _ in
+            self?.clearForm()
+        })
+        present(alert, animated: true)
+    }
+    
+    private func clearForm() {
+        nameTextField.text = ""
+        descriptionTextField.text = ""
+        priceTextField.text = ""
+        providerTextField.text = ""
     }
 }
