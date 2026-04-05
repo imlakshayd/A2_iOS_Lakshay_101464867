@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22225" targetRuntime="AppleSDK" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreaLayoutGuides="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22225" targetRuntime="AppleSDK" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreaLayoutGuides="YES" colorMatched="YES" initialViewController="Y5B-kH-T2g">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
@@ -7,23 +7,134 @@
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Tab Bar Controller-->
+        <scene sceneID="hGz-VP-xK4">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="A2_iOS_Lakshay_101464867" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                <tabBarController id="Y5B-kH-T2g" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="QNT-c5-kX3">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="UIK-hN-DeM" kind="relationship" relationship="viewControllers" id="kQB-2T-mvH"/>
+                        <segue destination="JRn-Kp-2aV" kind="relationship" relationship="viewControllers" id="nRf-5X-jLw"/>
+                        <segue destination="Fwq-Lx-89N" kind="relationship" relationship="viewControllers" id="qWp-8Y-dNt"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wMz-AL-fVu" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-210" y="-30"/>
+        </scene>
+        <!--Product Detail-->
+        <scene sceneID="R5G-dK-7nB">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="UIK-hN-DeM" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Detail" image="doc.text" id="mUg-HT-nCb"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="frZ-R1-Xv4">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="aXf-NQ-7zB" kind="relationship" relationship="rootViewController" id="sGr-3K-aXp"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xNa-BM-gWv" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="131" y="-310"/>
+        </scene>
+        <!--Product Detail View Controller-->
+        <scene sceneID="Bnf-Qv-3Lp">
+            <objects>
+                <viewController id="aXf-NQ-7zB" customClass="ProductDetailViewController" customModule="A2_iOS_Lakshay_101464867" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cRw-5k-Xq3">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <viewLayoutGuide key="safeArea" id="Ykw-3P-tEB"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Product Detail" id="V7T-kB-2jd"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aRd-EQ-jZy" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="131.297" y="-100.352"/>
+            <point key="canvasLocation" x="470" y="-310"/>
+        </scene>
+        <!--Products-->
+        <scene sceneID="W7H-nK-8pQ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="JRn-Kp-2aV" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Products" image="list.bullet" id="nVh-IU-oDc"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kwC-L3-hWm">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="bTn-MK-9yE" kind="relationship" relationship="rootViewController" id="tHx-7M-bYs"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yPb-CN-hXw" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="131" y="-30"/>
+        </scene>
+        <!--Product List View Controller-->
+        <scene sceneID="F3R-jL-9nC">
+            <objects>
+                <viewController id="bTn-MK-9yE" customClass="ProductListViewController" customModule="A2_iOS_Lakshay_101464867" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dWt-4j-Hp7">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="mNx-J2-rWk"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Products" id="L5Q-k8-XvZ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bSe-FR-kAz" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="470" y="-30"/>
+        </scene>
+        <!--Add Product-->
+        <scene sceneID="K9M-hN-5rP">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Fwq-Lx-89N" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Add" image="plus.circle" id="oWi-JV-pEd"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="uTf-Dv-qE8">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="eJm-LP-3vR" kind="relationship" relationship="rootViewController" id="uJy-9N-cZt"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zQc-DP-iYx" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="131" y="250"/>
+        </scene>
+        <!--Add Product View Controller-->
+        <scene sceneID="P4S-kM-2qN">
+            <objects>
+                <viewController id="eJm-LP-3vR" customClass="AddProductViewController" customModule="A2_iOS_Lakshay_101464867" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fKs-8n-Yw2">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="pTr-B3-nXw"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Add Product" id="H8J-mQ-pRz"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cTf-GS-lBa" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="470" y="250"/>
         </scene>
     </scenes>
     <resources>
+        <image name="doc.text" catalog="system" width="128" height="128"/>
+        <image name="list.bullet" catalog="system" width="128" height="128"/>
+        <image name="plus.circle" catalog="system" width="128" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
