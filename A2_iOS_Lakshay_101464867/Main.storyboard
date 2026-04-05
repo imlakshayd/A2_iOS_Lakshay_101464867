@@ -29,7 +29,7 @@
         <scene sceneID="R5G-dK-7nB">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="UIK-hN-DeM" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Detail" image="doc.text" id="mUg-HT-nCb"/>
+                    <tabBarItem key="tabBarItem" title="Detail" image="doc.text" selectedImage="doc.text.fill" id="mUg-HT-nCb"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="frZ-R1-Xv4">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
@@ -64,7 +64,7 @@
         <scene sceneID="W7H-nK-8pQ">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="JRn-Kp-2aV" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Products" image="list.bullet" id="nVh-IU-oDc"/>
+                    <tabBarItem key="tabBarItem" title="Products" image="list.bullet" selectedImage="list.bullet" id="nVh-IU-oDc"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="kwC-L3-hWm">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
@@ -99,7 +99,7 @@
         <scene sceneID="K9M-hN-5rP">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Fwq-Lx-89N" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Add" image="plus.circle" id="oWi-JV-pEd"/>
+                    <tabBarItem key="tabBarItem" title="Add" image="plus.circle" selectedImage="plus.circle.fill" id="oWi-JV-pEd"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="uTf-Dv-qE8">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
@@ -133,8 +133,10 @@
     </scenes>
     <resources>
         <image name="doc.text" catalog="system" width="128" height="128"/>
+        <image name="doc.text.fill" catalog="system" width="128" height="128"/>
         <image name="list.bullet" catalog="system" width="128" height="128"/>
         <image name="plus.circle" catalog="system" width="128" height="128"/>
+        <image name="plus.circle.fill" catalog="system" width="128" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
