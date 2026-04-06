@@ -25,6 +25,11 @@ class AddProductViewController: UIViewController {
         title = "Add Product"
         view.backgroundColor = .systemBackground
         setupUI()
+        
+        // Dismiss keyboard on tap
+        let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        tapGesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGesture)
     }
     
     // MARK: - UI Setup
