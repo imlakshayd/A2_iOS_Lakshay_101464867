@@ -42,6 +42,8 @@ class ProductListViewController: UIViewController, UITableViewDataSource, UITabl
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "ProductCell")
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 72
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
         

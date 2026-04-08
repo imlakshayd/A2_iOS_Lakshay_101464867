@@ -47,6 +47,7 @@ class AddProductViewController: UIViewController {
             field.placeholder = placeholder
             field.borderStyle = .roundedRect
             field.font = .systemFont(ofSize: 16)
+            field.clearButtonMode = .whileEditing
             field.translatesAutoresizingMaskIntoConstraints = false
         }
         

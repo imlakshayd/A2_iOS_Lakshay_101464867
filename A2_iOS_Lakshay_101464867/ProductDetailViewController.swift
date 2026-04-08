@@ -59,6 +59,10 @@ class ProductDetailViewController: UIViewController {
         // Card container
         cardView.backgroundColor = .secondarySystemBackground
         cardView.layer.cornerRadius = 12
+        cardView.layer.shadowColor = UIColor.black.cgColor
+        cardView.layer.shadowOpacity = 0.1
+        cardView.layer.shadowOffset = CGSize(width: 0, height: 2)
+        cardView.layer.shadowRadius = 8
         cardView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(cardView)
         
