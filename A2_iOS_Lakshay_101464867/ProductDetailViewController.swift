@@ -48,7 +48,7 @@ class ProductDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchProducts()
-        if selectedProductIndex == nil && currentIndex >= products.count {
+        if currentIndex >= products.count {
             currentIndex = max(products.count - 1, 0)
         }
         displayCurrentProduct()
